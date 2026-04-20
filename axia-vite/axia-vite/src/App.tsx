@@ -354,8 +354,7 @@ export default function App({ hasBackend = false }: { hasBackend?: boolean }) {
   const [showReferralPopup, setShowReferralPopup] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
-  const countData = useQuery(api.waitlist.getCount);
-  const joinWaitlist = useMutation(api.waitlist.join);
+const countData = useQuery(hasBackend ? api.waitlist.getCount : "skip");
 
   const signupCount = hasBackend ? (countData?.total ?? 100) : 107;
   const spotsRemaining = hasBackend ? (countData?.remaining ?? 100) : 93;
