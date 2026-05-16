@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /.convex/
+
+# Sitemaps
+Sitemap: https://axia.io/sitemap.xml
+
+# Crawl-delay (respectful crawling)
+Crawl-delay: 1
