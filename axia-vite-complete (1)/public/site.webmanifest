@@ -1,0 +1,16 @@
+{
+  "name": "Axia — Your Business, One Tab",
+  "short_name": "Axia",
+  "description": "CRM, billing, time tracking, and work verification for freelancers and agencies.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#030619",
+  "theme_color": "#C8A04D",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
