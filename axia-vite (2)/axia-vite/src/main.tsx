@@ -9,7 +9,7 @@ import "./index.css";
 // The Convex URL is a public endpoint (visible in browser network tab),
 // so it's safe to include in client-side code.
 // If VITE_CONVEX_URL is set (e.g., in Vercel env vars), it takes precedence.
-const CONVEX_PRODUCTION_URL = "https://agile-ladybug-573.convex.cloud";
+const CONVEX_PRODUCTION_URL = "https://tangible-orca-566.convex.cloud";
 
 const convexUrl = (import.meta.env.VITE_CONVEX_URL as string | undefined) || CONVEX_PRODUCTION_URL;
 
