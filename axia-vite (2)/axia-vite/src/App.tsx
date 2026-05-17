@@ -426,7 +426,7 @@ function ReferralPopup({ isOpen, onClose, position, referralCode, referralCount 
 }
 
 /* ─── Main App ───────────────────────────────────────────────────────── */
-export default function App({ hasBackend = false }: { hasBackend?: boolean }) {
+export default function App() {
   const searchParams = new URLSearchParams(typeof window !== "undefined" ? window.location.search : "");
   const refCode = searchParams.get("ref");
 
