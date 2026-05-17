@@ -473,37 +473,35 @@ export default function App() {
     }
   }, []);
 
-  // Only call Convex when backend is connected — skip ("skip" = undefined) when in demo mode
-  // This prevents 404 errors when VITE_CONVEX_URL is missing or invalid
-const countData = useQuery(api.waitlist.getCount);
- const joinWaitlist = useMutation(api.waitlist.join);
+  const countData = useQuery(api.waitlist.getCount);
+  const joinWaitlist = useMutation(api.waitlist.join);
 
-  
-const signupCount = countData?.total ?? 107;
-const spotsRemaining = countData?.remaining ?? 93;
+  const signupCount = countData?.total ?? 107;
+  const spotsRemaining = countData?.remaining ?? 93;
 
   useEffect(() => {
-    if (!hasBackend || !myReferralCode) return;
+    if (!myReferralCode) return;
     const interval = setInterval(async () => {}, 8000);
     return () => clearInterval(interval);
-  }, [myReferralCode, hasBackend]);
+  }, [myReferralCode]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email || !email.includes("@")) { toast.error("Please enter a valid email"); return; }
     setIsLoading(true);
-   try {
-  const result = await joinWaitlist({ email, ref: refCode || undefined });
-  console.log("[AXIA] Mutation result:", result);
-  if (result.success) {
-    setIsSuccess(true); setPosition((result.entry as any)?.position || 100);
-    setMyReferralCode((result.entry as any)?.referralCode || "");
-    setShowReferralPopup(true); toast.success(result.message as string);
-  } else { toast.error(result.error as string); }
-} catch (err) {
-  console.error("[AXIA] Mutation failed:", err);
-  toast.error("Failed to join. Please try again.");
-} finally { setIsLoading(false); }
+    try {
+      const result = await joinWaitlist({ email, ref: refCode || undefined });
+      console.log("[AXIA] Mutation result:", result);
+      if (result.success) {
+        setIsSuccess(true); setPosition((result.entry as any)?.position || 100);
+        setMyReferralCode((result.entry as any)?.referralCode || "");
+        setShowReferralPopup(true); toast.success(result.message as string);
+      } else { toast.error(result.error as string); }
+    } catch (err) {
+      console.error("[AXIA] Mutation failed:", err);
+      toast.error("Failed to join. Please try again.");
+    } finally { setIsLoading(false); }
+  };
 
   const SectionHeader = ({ label, title, subtitle, maxWidth = "max-w-lg" }: {
     label: string; title: string; subtitle: string; maxWidth?: string;
@@ -923,4 +921,4 @@ const spotsRemaining = countData?.remaining ?? 93;
       </footer>
     </div>
   );
-} }
+}
