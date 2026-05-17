@@ -476,7 +476,7 @@ export default function App() {
   // Only call Convex when backend is connected — skip ("skip" = undefined) when in demo mode
   // This prevents 404 errors when VITE_CONVEX_URL is missing or invalid
 const countData = useQuery(api.waitlist.getCount);
-const joinWaitlist = useMutation(api.waitlist.join);
+ const joinWaitlist = useMutation(api.waitlist.join);
 
   
 const signupCount = countData?.total ?? 107;
@@ -923,4 +923,4 @@ const spotsRemaining = countData?.remaining ?? 93;
       </footer>
     </div>
   );
-}
+} }
