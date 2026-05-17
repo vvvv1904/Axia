@@ -5,16 +5,13 @@ import { Toaster } from "sonner";
 import App from "./App";
 import "./index.css";
 
-// Convex production URL — hardcoded as fallback.
-// The Convex URL is a public endpoint (visible in browser network tab),
-// so it's safe to include in client-side code.
-// If VITE_CONVEX_URL is set (e.g., in Vercel env vars), it takes precedence.
 const CONVEX_PRODUCTION_URL = "https://tangible-orca-566.convex.cloud";
 
 const convexUrl = (import.meta.env.VITE_CONVEX_URL as string | undefined) || CONVEX_PRODUCTION_URL;
 
-// Determine if we have a real Convex backend
 const hasBackend = !!(convexUrl && convexUrl.startsWith("https://") && convexUrl.includes(".convex.cloud"));
+
+console.log("%c[AXIA DEBUG]", "color: #C8A04D; font-weight: bold;", "Convex URL:", convexUrl, "| hasBackend:", hasBackend, "| Mode:", hasBackend ? "CONNECTED" : "DEMO");
 
 const convex = new ConvexReactClient(
   hasBackend ? convexUrl : "https://placeholder.convex.cloud",
