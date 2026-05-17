@@ -5,22 +5,16 @@ import { Toaster } from "sonner";
 import App from "./App";
 import "./index.css";
 
-const CONVEX_PRODUCTION_URL = "https://tangible-orca-566.convex.cloud";
+const CONVEX_URL = "https://tangible-orca-566.convex.cloud";
 
-const convexUrl = (import.meta.env.VITE_CONVEX_URL as string | undefined) || CONVEX_PRODUCTION_URL;
+const convex = new ConvexReactClient(CONVEX_URL);
 
-const hasBackend = !!(convexUrl && convexUrl.startsWith("https://") && convexUrl.includes(".convex.cloud"));
-
-console.log("%c[AXIA DEBUG]", "color: #C8A04D; font-weight: bold;", "Convex URL:", convexUrl, "| hasBackend:", hasBackend, "| Mode:", hasBackend ? "CONNECTED" : "DEMO");
-
-const convex = new ConvexReactClient(
-  hasBackend ? convexUrl : "https://placeholder.convex.cloud",
-);
+console.log("[AXIA] Connected to Convex:", CONVEX_URL);
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <ConvexProvider client={convex}>
-      <App hasBackend={hasBackend} />
+      <App />
       <Toaster
         position="top-center"
         toastOptions={{
