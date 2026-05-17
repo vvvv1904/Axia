@@ -475,11 +475,12 @@ export default function App() {
 
   // Only call Convex when backend is connected — skip ("skip" = undefined) when in demo mode
   // This prevents 404 errors when VITE_CONVEX_URL is missing or invalid
-  const countData = useQuery(hasBackend ? api.waitlist.getCount : "skip");
-  const joinWaitlist = useMutation(api.waitlist.join);
+const countData = useQuery(api.waitlist.getCount);
+const joinWaitlist = useMutation(api.waitlist.join);
 
-  const signupCount = hasBackend ? (countData?.total ?? 100) : 107;
-  const spotsRemaining = hasBackend ? (countData?.remaining ?? 100) : 93;
+  
+const signupCount = countData?.total ?? 107;
+const spotsRemaining = countData?.remaining ?? 93;
 
   useEffect(() => {
     if (!hasBackend || !myReferralCode) return;
@@ -491,30 +492,18 @@ export default function App() {
     e.preventDefault();
     if (!email || !email.includes("@")) { toast.error("Please enter a valid email"); return; }
     setIsLoading(true);
-    try {
-      if (!hasBackend) {
-        await new Promise((r) => setTimeout(r, 800));
-        const fakeCode = "AX-" + Math.random().toString(36).substring(2, 7).toUpperCase();
-        setIsSuccess(true); setPosition(Math.floor(Math.random() * 20) + 80);
-        setMyReferralCode(fakeCode); setShowReferralPopup(true);
-        toast.success("Welcome! You're on the list (demo mode).");
-      } else {
-        const result = await joinWaitlist({ email, ref: refCode || undefined });
-        if (result.success) {
-          setIsSuccess(true); setPosition((result.entry as any)?.position || 100);
-          setMyReferralCode((result.entry as any)?.referralCode || "");
-          setShowReferralPopup(true); toast.success(result.message as string);
-        } else { toast.error(result.error as string); }
-      }
-    } catch {
-      if (!hasBackend) {
-        const fakeCode = "AX-" + Math.random().toString(36).substring(2, 7).toUpperCase();
-        setIsSuccess(true); setPosition(Math.floor(Math.random() * 20) + 80);
-        setMyReferralCode(fakeCode); setShowReferralPopup(true);
-        toast.success("Welcome! You're on the list (demo mode).");
-      } else { toast.error("Failed to join. Please try again."); }
-    } finally { setIsLoading(false); }
-  };
+   try {
+  const result = await joinWaitlist({ email, ref: refCode || undefined });
+  console.log("[AXIA] Mutation result:", result);
+  if (result.success) {
+    setIsSuccess(true); setPosition((result.entry as any)?.position || 100);
+    setMyReferralCode((result.entry as any)?.referralCode || "");
+    setShowReferralPopup(true); toast.success(result.message as string);
+  } else { toast.error(result.error as string); }
+} catch (err) {
+  console.error("[AXIA] Mutation failed:", err);
+  toast.error("Failed to join. Please try again.");
+} finally { setIsLoading(false); }
 
   const SectionHeader = ({ label, title, subtitle, maxWidth = "max-w-lg" }: {
     label: string; title: string; subtitle: string; maxWidth?: string;
