@@ -462,7 +462,7 @@ export default function App() {
 
   /* ─── SEO: Set document title dynamically ─── */
   useEffect(() => {
-    document.title = "Axia — Your Business, One Tab | CRM, Billing & Work Verification";
+    document.title = "Axia — The 1-tab system for Your entire agency & Freelance businesses.";
     const metaDesc = document.querySelector('meta[name="description"]');
     if (metaDesc) {
       metaDesc.setAttribute("content", "Axia replaces the five tools you duct-taped together — CRM, billing, time tracking, and a verification engine that makes disputes disappear. Save 10 hours every week. Built for freelancers and agencies.");
@@ -573,12 +573,11 @@ export default function App() {
                 </span>
               </div>
               <h1 className="animate-reveal-2 text-[30px] sm:text-[48px] md:text-[56px] font-bold text-[#1a1a1c] dark:text-[#fcfcfc] leading-[1.1] sm:leading-[1.08] tracking-[-0.03em] mb-5 sm:mb-6" itemProp="name">
-                Your Business, One Tab.<br />
-                <span className="hero-text-gradient">Ten hours back, every week.</span>
+                The 1-tab system for Your agency & Freelance business.<br />
+                <span className="hero-text-gradient">Ten hours back, every week, 1 Tab.</span>
               </h1>
               <p className="animate-reveal-3 text-sm sm:text-base md:text-lg text-[#1a1a1c]/70 dark:text-[#fcfcfc]/50 leading-relaxed mb-6 sm:mb-10 max-w-[520px]" itemProp="description">
-                Axia replaces the five tools you duct-taped together — CRM, billing, time tracking, and a
-                verification engine that makes &ldquo;What did you work on?&rdquo; emails disappear. One tab. Zero chaos.
+                Because 57% lose money to scope creep, and 43% waste hours on admin. The Only tool You'll ever need. The truth layer proves it. &ldquo; It Makes What did you work on?&rdquo; emails disappear. One tab. Zero chaos.
               </p>
               <form onSubmit={handleSubmit} className="animate-reveal-4 mb-4" id="signup-form" aria-label="Join Axia waitlist">
                 <div className="flex flex-col sm:flex-row gap-2.5">
